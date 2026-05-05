@@ -1,0 +1,40 @@
+version: "2"
+run:
+  timeout: 5m
+  modules-download-mode: readonly
+
+linters:
+  enable:
+    - govet
+    - staticcheck
+    - errcheck
+    - unused
+    - ineffassign
+    - revive
+    - gocritic
+
+  settings:
+    errcheck:
+      check-type-assertions: true
+
+    gocritic:
+      enabled-tags:
+        - diagnostic
+        - performance
+        - style
+
+    revive:
+      rules:
+        - name: exported
+
+  exclusions:
+    generated: lax
+    presets:
+      - comments
+      - common-false-positives
+      - std-error-handling
+
+formatters:
+  enable:
+    - gofmt
+    - goimports
