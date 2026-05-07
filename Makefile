@@ -13,7 +13,6 @@ build:
 	go build -o bin/app ./cmd/api
 
 run:
-	go run ./cmd/api
 
 dev:
 	go run ./cmd/api
