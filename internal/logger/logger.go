@@ -8,6 +8,7 @@ import (
 	"github.com/rs/zerolog/log"
 )
 
+// New creates a beautiful logger
 func New() zerolog.Logger {
 	zerolog.TimeFieldFormat = time.RFC3339
 	if os.Getenv("GIN_MODE") != "release" {

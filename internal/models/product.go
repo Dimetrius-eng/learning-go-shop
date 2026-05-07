@@ -6,6 +6,7 @@ import (
 	"gorm.io/gorm"
 )
 
+// Category contains all the category's attributes
 type Category struct {
 	ID          uint           `json:"id" gorm:"primaryKey"`
 	Name        string         `json:"name" gorm:"not null"`
@@ -19,6 +20,7 @@ type Category struct {
 	Products []Product `json:"-"`
 }
 
+// Product contains all the product's attributes
 type Product struct {
 	ID          uint           `json:"id" gorm:"primaryKey"`
 	CategoryID  uint           `json:"category_id" gorm:"not null"`
@@ -39,6 +41,7 @@ type Product struct {
 	CartItems  []CartItem     `json:"-"`
 }
 
+// ProductImage contains all the product image's attributes
 type ProductImage struct {
 	ID        uint           `json:"id" gorm:"primaryKey"`
 	ProductID uint           `json:"product_id" gorm:"not null"`
