@@ -3,6 +3,7 @@ package services
 import (
 	"errors"
 	"fmt"
+	"log"
 	"time"
 
 	"github.com/Dimetrius-eng/learning-go-shop/internal/config"
@@ -27,8 +28,8 @@ func NewAuthService(db *gorm.DB, cfg *config.Config) *AuthService {
 func (s *AuthService) Register(req *dto.RegisterRequest) (*dto.AuthResponse, error) {
 	// Check if user exists
 	var existingUser models.User
-	if err := s.db.Where("email = ?", req.Email).First(&existingUser).Error; err != nil {
-		return nil, errors.New("user not found")
+	if err := s.db.Where("email = ?", req.Email).First(&existingUser).Error; err == nil {
+		return nil, errors.New("you cannot register with this email")
 	}
 	// Hash password
 	hashedPassword, err := utils.HashPassword(req.Password)
@@ -80,7 +81,7 @@ func (s *AuthService) RefreshToken(req *dto.RefreshTokenRequest) (*dto.AuthRespo
 	}
 
 	var refreshToken models.RefreshToken
-	if err := s.db.Where("token = ? AND expires_at = ?", req.RefreshToken, time.Now()).First(&refreshToken); err != nil {
+	if err := s.db.Where("token = ? AND expires_at > ?", req.RefreshToken, time.Now()).First(&refreshToken).Error; err != nil {
 		return nil, errors.New("refresh token not found or expired")
 	}
 
@@ -88,6 +89,9 @@ func (s *AuthService) RefreshToken(req *dto.RefreshTokenRequest) (*dto.AuthRespo
 	if err := s.db.First(&user, claims.UserID).Error; err != nil {
 		return nil, errors.New("user not found")
 	}
+
+	log.Printf("Refresh request: token=%s, claims=%+v\n", req.RefreshToken, claims)
+	log.Printf("DB lookup: %+v\n", refreshToken)
 
 	s.db.Delete(&refreshToken)
 
