@@ -6,7 +6,6 @@ import (
 	"gorm.io/gorm"
 )
 
-// Order contains all the order's attributes
 type Order struct {
 	ID          uint           `json:"id" gorm:"primaryKey"`
 	UserID      uint           `json:"user_id" gorm:"not null"`
@@ -21,27 +20,16 @@ type Order struct {
 	OrderItems []OrderItem `json:"order_items"`
 }
 
-// OrderStatus is a custom type
 type OrderStatus string
 
 const (
-	// OrderStatusPending is a pending order
-	OrderStatusPending OrderStatus = "pending"
-
-	// OrderStatusConfirmed is a confirmed order
+	OrderStatusPending   OrderStatus = "pending"
 	OrderStatusConfirmed OrderStatus = "confirmed"
-
-	// OrderStatusShipped is a shipped order
-	OrderStatusShipped OrderStatus = "shipped"
-
-	// OrderStatusDelivered is a delivered order
+	OrderStatusShipped   OrderStatus = "shipped"
 	OrderStatusDelivered OrderStatus = "delivered"
-
-	// OrderStatusCancelled is a canceled order
 	OrderStatusCancelled OrderStatus = "cancelled"
 )
 
-// OrderItem contains all the order item's attributes
 type OrderItem struct {
 	ID        uint           `json:"id" gorm:"primaryKey"`
 	OrderID   uint           `json:"order_id" gorm:"not null"`
@@ -56,7 +44,6 @@ type OrderItem struct {
 	Product Product `json:"product"`
 }
 
-// Cart contains all the cart's attributes
 type Cart struct {
 	ID        uint           `json:"id" gorm:"primaryKey"`
 	UserID    uint           `json:"user_id" gorm:"uniqueIndex;not null"`
@@ -68,7 +55,6 @@ type Cart struct {
 	CartItems []CartItem `json:"cart_items"`
 }
 
-// CartItem contains all the cart item's attributes
 type CartItem struct {
 	ID        uint           `json:"id" gorm:"primaryKey"`
 	CartID    uint           `json:"cart_id" gorm:"not null"`

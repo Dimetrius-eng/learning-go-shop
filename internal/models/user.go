@@ -26,18 +26,13 @@ type User struct {
 	Cart          Cart           `json:"-"`
 }
 
-// UserRole is a custom type
 type UserRole string
 
 const (
-	// UserRoleCustomer is a role for customer
 	UserRoleCustomer UserRole = "customer"
-
-	// UserRoleAdmin is a role for admin
-	UserRoleAdmin UserRole = "admin"
+	UserRoleAdmin    UserRole = "admin"
 )
 
-// RefreshToken contains all the refresh token's attributes
 type RefreshToken struct {
 	ID        uint           `json:"id" gorm:"primaryKey"`
 	UserID    uint           `json:"user_id" gorm:"not null"`
