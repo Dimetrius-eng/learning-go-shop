@@ -4,22 +4,35 @@ import (
 	"net/http"
 
 	"github.com/Dimetrius-eng/learning-go-shop/internal/config"
+	"github.com/Dimetrius-eng/learning-go-shop/internal/services"
 	"github.com/gin-gonic/gin"
 	"github.com/rs/zerolog"
 	"gorm.io/gorm"
 )
 
 type Server struct {
-	config *config.Config
-	db     *gorm.DB
-	logger *zerolog.Logger
+	config         *config.Config
+	db             *gorm.DB
+	logger         *zerolog.Logger
+	authService    *services.AuthService
+	productService *services.ProductService
+	userService    *services.UserService
 }
 
-func New(cfg *config.Config, db *gorm.DB, logger *zerolog.Logger) *Server {
+func New(cfg *config.Config,
+	db *gorm.DB,
+	logger *zerolog.Logger,
+	authService *services.AuthService,
+	productService *services.ProductService,
+	userService *services.UserService,
+) *Server {
 	return &Server{
-		config: cfg,
-		db:     db,
-		logger: logger,
+		config:         cfg,
+		db:             db,
+		logger:         logger,
+		authService:    authService,
+		productService: productService,
+		userService:    userService,
 	}
 }
 
@@ -79,8 +92,8 @@ func (s *Server) SetupRoutes() *gin.Engine {
 
 		// Public routes
 		api.GET("/categories", s.getCategories)
-		api.GET("/product", s.getProduct)
-		api.GET("/products/:id", s.getProducts)
+		api.GET("/products", s.getProducts)
+		api.GET("/products/:id", s.getProduct)
 
 	}
 	return router
