@@ -1,7 +1,6 @@
 package server
 
 import (
-	"fmt"
 	"strconv"
 
 	"github.com/Dimetrius-eng/learning-go-shop/internal/dto"
@@ -162,8 +161,6 @@ func (s *Server) uploadProductImage(c *gin.Context) {
 		utils.BadRequestResponse(c, "Invalid product ID", err)
 		return
 	}
-
-	fmt.Println("Content-Type:", c.Request.Header.Get("Content-Type"))
 
 	file, err := c.FormFile("image")
 	if err != nil {

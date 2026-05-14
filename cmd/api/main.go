@@ -12,6 +12,7 @@ import (
 
 	"github.com/Dimetrius-eng/learning-go-shop/internal/config"
 	"github.com/Dimetrius-eng/learning-go-shop/internal/database"
+	"github.com/Dimetrius-eng/learning-go-shop/internal/interfaces"
 	"github.com/Dimetrius-eng/learning-go-shop/internal/logger"
 	"github.com/Dimetrius-eng/learning-go-shop/internal/providers"
 	"github.com/Dimetrius-eng/learning-go-shop/internal/server"
@@ -45,7 +46,14 @@ func main() {
 	authService := services.NewAuthService(db, cfg)
 	productService := services.NewProductService(db)
 	userService := services.NewUserService(db)
-	uploadService := services.NewUploadService(providers.NewLocalUploadProvider(cfg.Upload.Path))
+
+	var uploadProvider interfaces.UploadProvider
+	if cfg.Upload.UploadProvider == "s3" {
+		uploadProvider = providers.NewS3Provider(cfg)
+	} else {
+		uploadProvider = providers.NewLocalUploadProvider(cfg.Upload.Path)
+	}
+	uploadService := services.NewUploadService(uploadProvider)
 
 	srv := server.New(cfg, db, &log, authService, productService, userService, uploadService)
 
