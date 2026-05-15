@@ -2,10 +2,11 @@ package services
 
 import (
 	"fmt"
-	"github.com/google/uuid"
 	"mime/multipart"
 	"path/filepath"
 	"strings"
+
+	"github.com/google/uuid"
 
 	"github.com/Dimetrius-eng/learning-go-shop/internal/interfaces"
 )
