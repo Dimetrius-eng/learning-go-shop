@@ -2,6 +2,7 @@ package services
 
 import (
 	"fmt"
+	"github.com/google/uuid"
 	"mime/multipart"
 	"path/filepath"
 	"strings"
@@ -24,7 +25,9 @@ func (s *UploadService) UploadProductImage(productID uint, file *multipart.FileH
 		return "", fmt.Errorf("invalid file type: %s", ext)
 	}
 
-	path := fmt.Sprintf("products/%d/%s", productID, file.Filename)
+	newFileName := uuid.New().String()
+
+	path := fmt.Sprintf("products/%d/%s%s", productID, newFileName, ext)
 
 	return s.provider.UploadFile(file, path)
 }
