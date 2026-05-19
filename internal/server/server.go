@@ -3,10 +3,13 @@ package server
 import (
 	"net/http"
 
+	_ "github.com/Dimetrius-eng/learning-go-shop/docs"
 	"github.com/Dimetrius-eng/learning-go-shop/internal/config"
 	"github.com/Dimetrius-eng/learning-go-shop/internal/services"
 	"github.com/gin-gonic/gin"
 	"github.com/rs/zerolog"
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 	"gorm.io/gorm"
 )
 
@@ -55,6 +58,10 @@ func (s *Server) SetupRoutes() *gin.Engine {
 
 	// Add routes
 	router.GET("/health", s.healthCheck)
+
+	// Add documentation routes
+	router.GET("/docs/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+	router.StaticFile("/api-docs", "./docs/rapidoc.html")
 
 	router.Static("/uploads", "./uploads")
 
