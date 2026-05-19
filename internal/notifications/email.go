@@ -81,3 +81,20 @@ func (e *EmailNotifier) SendSimpleEmail(email *SimpleEmail) error {
 
 	return w.Close()
 }
+
+func (e *EmailNotifier) SendLoginNotification(userEmail, userName string) error {
+	email := &SimpleEmail{
+		To:      userEmail,
+		Subject: "Login Notification",
+		Body: fmt.Sprintf(`Hello %s,
+
+You have successfully logged into your account.
+
+If this wasn't you, please contact support immediately.
+
+Best regards,
+The Shop Team`, userName),
+	}
+
+	return e.SendSimpleEmail(email)
+}
