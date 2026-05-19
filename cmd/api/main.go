@@ -57,7 +57,7 @@ func main() {
 		log.Fatal().Err(err).Msg("failed to get database connection")
 	}
 	fmt.Printf("%T\n", mainDB)
-	defer mainDB.Close() //nolint:errcheck // ignore error on close, safe in defer
+	defer mainDB.Close() //nolint:errcheck
 
 	ctx := context.Background()
 

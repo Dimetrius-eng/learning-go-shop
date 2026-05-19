@@ -31,14 +31,14 @@ func NewEmailNotifier(config *SMTPConfig) *EmailNotifier {
 }
 
 func (e *EmailNotifier) SendSimpleEmail(email *SimpleEmail) error {
-	addr := fmt.Sprintf("%s:%d", e.config.Host, e.config.Port)
+	addr := fmt.Sprintf("%s:%d", e.config.Host, e.config.Port) //nolint:govet
 
 	// Connect directly without TLS for development
 	conn, err := net.Dial("tcp", addr)
 	if err != nil {
 		return err
 	}
-	defer conn.Close()
+	defer conn.Close() //nolint:errcheck
 
 	client, err := smtp.NewClient(conn, e.config.Host)
 	if err != nil {

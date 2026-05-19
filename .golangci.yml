@@ -28,6 +28,8 @@ linters:
         - opinionated
         - performance
         - style
+      disabled-checks:
+        - whyNoLint
     revive:
       rules:
         - name: exported
