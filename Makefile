@@ -11,7 +11,8 @@ help:
 	@echo "  make migrate-down- Rollback database migrations"
 
 build:
-	go build -o bin/app ./cmd/api
+	go build -o bin/api ./cmd/api
+	go build -o bin/notifier ./cmd/notifier
 
 run:
 	go run ./cmd/api
