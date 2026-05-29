@@ -3,8 +3,6 @@ package resolver
 import (
 	"context"
 	"errors"
-
-	"github.com/Dimetrius-eng/learning-go-shop/internal/utils"
 )
 
 var (
