@@ -33,5 +33,6 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 WORKDIR /root/
 
 COPY --from=builder /app/bin/* ./
+COPY --from=builder /app/docs ./docs
 
 CMD ["./api"]
