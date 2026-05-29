@@ -19,48 +19,48 @@ resolver:
   filename_template: "{name}.resolvers.go" # Template for resolver filenames (e.g., schema.resolvers.go)
 
 autobind:
-  - "github.com/joefazee/learning-go-shop/internal/dto"
+  - "github.com/Dimetrius-eng/learning-go-shop/internal/dto"
 
 models:
   User:
-    model: github.com/joefazee/learning-go-shop/internal/dto.UserResponse
+    model: github.com/Dimetrius-eng/learning-go-shop/internal/dto.UserResponse
   AuthPayload:
-    model: github.com/joefazee/learning-go-shop/internal/dto.AuthResponse
+    model: github.com/Dimetrius-eng/learning-go-shop/internal/dto.AuthResponse
   Product:
-    model: github.com/joefazee/learning-go-shop/internal/dto.ProductResponse
+    model: github.com/Dimetrius-eng/learning-go-shop/internal/dto.ProductResponse
   Category:
-    model: github.com/joefazee/learning-go-shop/internal/dto.CategoryResponse
+    model: github.com/Dimetrius-eng/learning-go-shop/internal/dto.CategoryResponse
   Cart:
-    model: github.com/joefazee/learning-go-shop/internal/dto.CartResponse
+    model: github.com/Dimetrius-eng/learning-go-shop/internal/dto.CartResponse
   CartItem:
-    model: github.com/joefazee/learning-go-shop/internal/dto.CartItemResponse
+    model: github.com/Dimetrius-eng/learning-go-shop/internal/dto.CartItemResponse
   Order:
-    model: github.com/joefazee/learning-go-shop/internal/dto.OrderResponse
+    model: github.com/Dimetrius-eng/learning-go-shop/internal/dto.OrderResponse
   OrderItem:
-    model: github.com/joefazee/learning-go-shop/internal/dto.OrderItemResponse
+    model: github.com/Dimetrius-eng/learning-go-shop/internal/dto.OrderItemResponse
   ProductImage:
-    model: github.com/joefazee/learning-go-shop/internal/dto.ProductImageResponse
+    model: github.com/Dimetrius-eng/learning-go-shop/internal/dto.ProductImageResponse
 
   RegisterInput:
-    model: github.com/joefazee/learning-go-shop/internal/dto.RegisterRequest
+    model: github.com/Dimetrius-eng/learning-go-shop/internal/dto.RegisterRequest
   LoginInput:
-    model: github.com/joefazee/learning-go-shop/internal/dto.LoginRequest
+    model: github.com/Dimetrius-eng/learning-go-shop/internal/dto.LoginRequest
   RefreshTokenInput:
-    model: github.com/joefazee/learning-go-shop/internal/dto.RefreshTokenRequest
+    model: github.com/Dimetrius-eng/learning-go-shop/internal/dto.RefreshTokenRequest
   UpdateProfileInput:
-    model: github.com/joefazee/learning-go-shop/internal/dto.UpdateProfileRequest
+    model: github.com/Dimetrius-eng/learning-go-shop/internal/dto.UpdateProfileRequest
   CreateCategoryInput:
-    model: github.com/joefazee/learning-go-shop/internal/dto.CreateCategoryRequest
+    model: github.com/Dimetrius-eng/learning-go-shop/internal/dto.CreateCategoryRequest
   UpdateCategoryInput:
-    model: github.com/joefazee/learning-go-shop/internal/dto.UpdateCategoryRequest
+    model: github.com/Dimetrius-eng/learning-go-shop/internal/dto.UpdateCategoryRequest
   UpdateCartItemInput:
-    model: github.com/joefazee/learning-go-shop/internal/dto.UpdateCartItemRequest
+    model: github.com/Dimetrius-eng/learning-go-shop/internal/dto.UpdateCartItemRequest
   CreateProductInput:
-    model: github.com/joefazee/learning-go-shop/internal/dto.CreateProductRequest
+    model: github.com/Dimetrius-eng/learning-go-shop/internal/dto.CreateProductRequest
   UpdateProductInput:
-    model: github.com/joefazee/learning-go-shop/internal/dto.UpdateProductRequest
+    model: github.com/Dimetrius-eng/learning-go-shop/internal/dto.UpdateProductRequest
   AddToCartInput:
-    model: github.com/joefazee/learning-go-shop/internal/dto.AddToCartRequest
+    model: github.com/Dimetrius-eng/learning-go-shop/internal/dto.AddToCartRequest
   ID:
     model: github.com/99designs/gqlgen/graphql.String
   UInt:
