@@ -11,21 +11,25 @@ import (
 	"github.com/Dimetrius-eng/learning-go-shop/internal/events"
 	"github.com/Dimetrius-eng/learning-go-shop/internal/models"
 	"github.com/Dimetrius-eng/learning-go-shop/internal/notifications"
+	"github.com/Dimetrius-eng/learning-go-shop/internal/repositories"
 	"github.com/Dimetrius-eng/learning-go-shop/internal/utils"
-	"gorm.io/gorm"
 )
 
 var _ AuthServiceInterface = (*AuthService)(nil)
 
 type AuthService struct {
-	db             *gorm.DB
+	userRepo       repositories.UserRepositoryInterface
+	cartRepo       repositories.CartRepositoryInterface
 	config         *config.Config
 	eventPublisher events.Publisher
 }
 
-func NewAuthService(db *gorm.DB, cfg *config.Config, eventPublisher events.Publisher) *AuthService {
+func NewAuthService(cfg *config.Config,
+	eventPublisher events.Publisher,
+	userRepo repositories.UserRepositoryInterface,
+	cartRepo repositories.CartRepositoryInterface,
+) *AuthService {
 	return &AuthService{
-		db:             db,
 		config:         cfg,
 		eventPublisher: eventPublisher,
 	}

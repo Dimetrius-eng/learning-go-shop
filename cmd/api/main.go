@@ -16,6 +16,7 @@ import (
 	"github.com/Dimetrius-eng/learning-go-shop/internal/interfaces"
 	"github.com/Dimetrius-eng/learning-go-shop/internal/logger"
 	"github.com/Dimetrius-eng/learning-go-shop/internal/providers"
+	"github.com/Dimetrius-eng/learning-go-shop/internal/repositories"
 	"github.com/Dimetrius-eng/learning-go-shop/internal/server"
 	"github.com/Dimetrius-eng/learning-go-shop/internal/services"
 	"github.com/gin-gonic/gin"
@@ -68,7 +69,14 @@ func main() {
 	}
 	gin.SetMode(cfg.Server.GinMode)
 
-	authService := services.NewAuthService(db, cfg, eventPublisher)
+	userRepo := repositories.NewUserRepository(db)
+	cartRepo := repositories.NewCartRepository(db)
+	authService := services.NewAuthService(
+		cfg,
+		eventPublisher,
+		userRepo,
+		cartRepo,
+	)
 	productService := services.NewProductService(db)
 	userService := services.NewUserService(db)
 	cartService := services.NewCartService(db)
