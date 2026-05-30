@@ -48,25 +48,3 @@ func IsAdminFromContext(ctx context.Context) bool {
 
 	return role == adminRole
 }
-
-func getPagingNumbers(page, limit *int) (pageNumber, pageLimit int) {
-	var p, l = 0, 0
-
-	if page != nil {
-		p = *page
-	}
-
-	if limit != nil {
-		l = *limit
-	}
-
-	if p <= 0 {
-		p = 1
-	}
-
-	if l <= 0 {
-		l = 10
-	}
-
-	return p, l
-}
