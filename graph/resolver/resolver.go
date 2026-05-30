@@ -18,18 +18,14 @@ type Resolver struct {
 	orderService   services.OrderService
 }
 
-func NewResolver(authService services.AuthService,
-	userService services.UserService,
-	productService services.ProductService,
-	cartService services.CartService,
-	orderService services.OrderService) *Resolver {
+func NewResolver(authService *services.AuthService, userService *services.UserService, productService *services.ProductService, cartService *services.CartService, orderService *services.OrderService) *Resolver {
 
 	return &Resolver{
-		authService:    authService,
-		userService:    userService,
-		productService: productService,
-		cartService:    cartService,
-		orderService:   orderService,
+		authService:    *authService,
+		userService:    *userService,
+		productService: *productService,
+		cartService:    *cartService,
+		orderService:   *orderService,
 	}
 
 }
