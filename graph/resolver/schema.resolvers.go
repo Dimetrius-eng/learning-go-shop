@@ -14,8 +14,12 @@ import (
 	"github.com/Dimetrius-eng/learning-go-shop/internal/dto"
 )
 
+type mutationResolver struct{ *Resolver }
+
+type queryResolver struct{ *Resolver }
+
 // Register is the resolver for the register field.
-func (r *mutationResolver) Register(ctx context.Context, input dto.RegisterRequest) (*dto.AuthResponse, error) {
+func (r *mutationResolver) Register(ctx context.Context, input dto.RegisterRequest) (*dto.AuthResponse, error) { //nolint:gocritic
 	response, err := r.authService.Register(&input)
 	if err != nil {
 		return nil, fmt.Errorf("registration failed: %w", err)
@@ -144,7 +148,6 @@ func (r *mutationResolver) UpdateProduct(ctx context.Context, id string, input d
 		return nil, fmt.Errorf("failed to update product: %w", err)
 	}
 	return product, nil
-
 }
 
 // DeleteProduct is the resolver for the deleteProduct field.
@@ -214,7 +217,6 @@ func (r *mutationResolver) RemoveFromCart(ctx context.Context, id string) (bool,
 	}
 
 	return true, nil
-
 }
 
 // CreateOrder is the resolver for the createOrder field.
@@ -247,7 +249,7 @@ func (r *queryResolver) Me(ctx context.Context) (*dto.UserResponse, error) {
 }
 
 // Products is the resolver for the products field.
-func (r *queryResolver) Products(ctx context.Context, page *int, limit *int) (*model.ProductConnection, error) {
+func (r *queryResolver) Products(ctx context.Context, page, limit *int) (*model.ProductConnection, error) {
 	p, l := getPagingNumbers(page, limit)
 
 	products, meta, err := r.productService.GetProducts(p, l)
@@ -255,7 +257,7 @@ func (r *queryResolver) Products(ctx context.Context, page *int, limit *int) (*m
 		return nil, fmt.Errorf("failed to get products: %w", err)
 	}
 	edges := make([]*model.ProductEdge, len(products)) // allocate enough memory for all the products
-	for i, product := range products {
+	for i, product := range products {                 //nolint:gocritic
 		edges[i] = &model.ProductEdge{
 			Node: &product,
 		}
@@ -318,7 +320,7 @@ func (r *queryResolver) Cart(ctx context.Context) (*dto.CartResponse, error) {
 }
 
 // Orders is the resolver for the orders field.
-func (r *queryResolver) Orders(ctx context.Context, page *int, limit *int) (*model.OrderConnection, error) {
+func (r *queryResolver) Orders(ctx context.Context, page, limit *int) (*model.OrderConnection, error) {
 	userID, err := GetUserIDFromContext(ctx)
 	if err != nil {
 		return nil, ErrUnauthorized
@@ -374,23 +376,3 @@ func (r *Resolver) Mutation() graph.MutationResolver { return &mutationResolver{
 
 // Query returns graph.QueryResolver implementation.
 func (r *Resolver) Query() graph.QueryResolver { return &queryResolver{r} }
-
-type mutationResolver struct{ *Resolver }
-type queryResolver struct{ *Resolver }
-
-func getPagingNumbers(page *int, limit *int) (int, int) {
-	var p, l = 0, 0
-	if page != nil {
-		p = *page
-	}
-	if limit != nil {
-		l = *limit
-	}
-	if p <= 0 {
-		p = 1
-	}
-	if l <= 0 {
-		l = 10
-	}
-	return p, l
-}

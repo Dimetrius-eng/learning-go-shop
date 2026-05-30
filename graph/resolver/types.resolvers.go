@@ -13,6 +13,15 @@ import (
 	"github.com/Dimetrius-eng/learning-go-shop/internal/dto"
 )
 
+type cartResolver struct{ *Resolver }
+type cartItemResolver struct{ *Resolver }
+type categoryResolver struct{ *Resolver }
+type orderResolver struct{ *Resolver }
+type orderItemResolver struct{ *Resolver }
+type productResolver struct{ *Resolver }
+type productImageResolver struct{ *Resolver }
+type userResolver struct{ *Resolver }
+
 // ID is the resolver for the id field.
 func (r *cartResolver) ID(ctx context.Context, obj *dto.CartResponse) (string, error) {
 	return fmt.Sprintf("%d", obj.ID), nil
@@ -91,12 +100,3 @@ func (r *Resolver) ProductImage() graph.ProductImageResolver { return &productIm
 
 // User returns graph.UserResolver implementation.
 func (r *Resolver) User() graph.UserResolver { return &userResolver{r} }
-
-type cartResolver struct{ *Resolver }
-type cartItemResolver struct{ *Resolver }
-type categoryResolver struct{ *Resolver }
-type orderResolver struct{ *Resolver }
-type orderItemResolver struct{ *Resolver }
-type productResolver struct{ *Resolver }
-type productImageResolver struct{ *Resolver }
-type userResolver struct{ *Resolver }

@@ -83,7 +83,6 @@ func main() {
 	uploadService := services.NewUploadService(uploadProvider)
 
 	srv := server.New(cfg,
-		db,
 		&log,
 		authService,
 		productService,

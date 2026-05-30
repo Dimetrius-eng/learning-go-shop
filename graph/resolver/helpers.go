@@ -3,6 +3,8 @@ package resolver
 import (
 	"context"
 	"errors"
+
+	"github.com/Dimetrius-eng/learning-go-shop/internal/utils"
 )
 
 var (
@@ -15,7 +17,7 @@ const (
 
 // GetUserIDFromContext functions to extract user info from GraphQL context
 func GetUserIDFromContext(ctx context.Context) (uint, error) {
-	userID := ctx.Value("user_id")
+	userID := ctx.Value(utils.UserIDKey)
 	if userID == nil {
 		return 0, ErrUnauthorized
 	}
@@ -28,7 +30,7 @@ func GetUserIDFromContext(ctx context.Context) (uint, error) {
 }
 
 func GetUserRoleFromContext(ctx context.Context) (string, error) {
-	userRole := ctx.Value("user_role")
+	userRole := ctx.Value(utils.UserRoleKey)
 	if userRole == nil {
 		return "", ErrUnauthorized
 	}
@@ -47,4 +49,21 @@ func IsAdminFromContext(ctx context.Context) bool {
 	}
 
 	return role == adminRole
+}
+
+func getPagingNumbers(page, limit *int) (pageNumber, pageLimit int) {
+	var p, l = 0, 0
+	if page != nil {
+		p = *page
+	}
+	if limit != nil {
+		l = *limit
+	}
+	if p <= 0 {
+		p = 1
+	}
+	if l <= 0 {
+		l = 10
+	}
+	return p, l
 }
