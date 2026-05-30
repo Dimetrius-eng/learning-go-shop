@@ -6,6 +6,8 @@ import (
 	"gorm.io/gorm"
 )
 
+var _ UploadServiceInterface = (*UploadService)(nil)
+
 type UserService struct {
 	db *gorm.DB
 }
