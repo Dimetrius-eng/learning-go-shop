@@ -63,7 +63,7 @@ type ProductImageResponse struct {
 	CreatedAt time.Time `json:"created_at"`
 }
 
-/* type SearchProductsRequest struct {
+type SearchProductsRequest struct {
 	Query      string   `form:"q" binding:"required,min=1"`
 	Page       int      `form:"page"`
 	Limit      int      `form:"limit"`
@@ -75,4 +75,4 @@ type ProductImageResponse struct {
 type ProductSearchResult struct {
 	ProductResponse
 	Rank float32 `json:"rank"`
-} */
+}

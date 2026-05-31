@@ -32,6 +32,8 @@ func NewAuthService(cfg *config.Config,
 	return &AuthService{
 		config:         cfg,
 		eventPublisher: eventPublisher,
+		userRepo:       userRepo,
+		cartRepo:       cartRepo,
 	}
 }
 
